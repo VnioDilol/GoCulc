@@ -5,6 +5,7 @@ This calculator uses the library "govaluate" and "fyne" to work with calculation
 # You can build it:
 ```
 $ go get
-
+```
+```
 $ go build main.go
 ```
