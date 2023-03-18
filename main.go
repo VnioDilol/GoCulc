@@ -11,8 +11,10 @@ import (
 	"fyne.io/fyne/container"
 	//"fyne.io/fyne/layout"
 	"fyne.io/fyne/widget"
-	"github.com/Knetic/govaluate"
+	"github.com/Knetic/govaluate" //just a thing for calculations
 )
+
+//Few functions defining additional features for "govaluate":
 
 func Cos(args ...interface{}) (interface{}, error) {
 	if len(args) != 1 {
@@ -58,14 +60,17 @@ func Log(args ...interface{}) (interface{}, error) {
 	return math.Log(x), nil
 }
 
+//it's just the main function
+
 func main() {
+	//application initialization
 	myApp := app.New()
 	myWin := myApp.NewWindow("Калькулятор")
-
+	//create I/O panel
 	inputLabel := widget.NewLabel("")
 	resultLabel := widget.NewLabel("")
 	resultLabel.TextStyle = fyne.TextStyle{Bold: true, Italic: true}
-
+	//creating a digital block
 	grid := container.NewGridWithColumns(4,
 		widget.NewButton("1", func() { inputLabel.SetText(inputLabel.Text + "1") }),
 		widget.NewButton("2", func() { inputLabel.SetText(inputLabel.Text + "2") }),
@@ -104,7 +109,7 @@ func main() {
 		}),
 		widget.NewButton("/", func() { inputLabel.SetText(inputLabel.Text + "/") }),
 	)
-
+	//block for trigonometry and other functions
 	trigonometryBox := container.NewGridWithColumns(7,
 		widget.NewButton("sin", func() { inputLabel.SetText(inputLabel.Text + "Sin(") }),
 		widget.NewButton("cos", func() { inputLabel.SetText(inputLabel.Text + "Cos(") }),
@@ -114,7 +119,7 @@ func main() {
 		widget.NewButton("(", func() { inputLabel.SetText(inputLabel.Text + "(") }),
 		widget.NewButton(")", func() { inputLabel.SetText(inputLabel.Text + ")") }),
 	)
-
+	//I/O block
 	content := container.NewVBox(
 		widget.NewLabel("Калькулятор"),
 		widget.NewCard("", "", grid),
@@ -123,5 +128,5 @@ func main() {
 		resultLabel,
 	)
 	myWin.SetContent(content)
-	myWin.ShowAndRun()
+	myWin.ShowAndRun() //yes, it run my app, easy :3
 }
